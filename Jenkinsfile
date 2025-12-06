@@ -5,7 +5,7 @@ pipeline {
         // Etapa para detener los contenedores de docker
         stage('Parando los servicios') {
             steps {
-                sh '''
+                bat '''
                 docker compose -p sgu-jjrv-10d down || true
                 '''
             }
@@ -14,7 +14,7 @@ pipeline {
         // Etapa para eliminar las imágenes viejas
         stage('Eliminando imagenes anteriores') {
             steps {
-                sh '''
+                bat '''
                 IMAGES=$(docker images --filter "label=com.docker.compose.project=sgu-jjrv-10d" -q)
                 if [ -n "$IMAGES" ]; then
                     docker rmi -f $IMAGES
@@ -35,7 +35,7 @@ pipeline {
         // Etapa para construir y desplegar
         stage('Construyendo y desplegando') {
             steps {
-                sh '''
+                bat '''
                 docker compose up --build -d
                 '''
             }
