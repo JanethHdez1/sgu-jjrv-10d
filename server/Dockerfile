@@ -13,7 +13,7 @@ COPY . .
 RUN mvn clean package -DskipTests && cp target/*.jar app.jar
 
 # Exponer la imagen en puerto
-EXPOSE 8081
+EXPOSE 8080
 
 # Ejecutar el comando para servir el jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
